@@ -176,7 +176,7 @@ app.post("/find-pets", (req, res) => {
   res.render("petResults", { petRecords });
 });
 
-function getPetInfo(ownerName = null) {
+function getPetInfo() {
   const petInfoFilePath = path.join(__dirname, "data", "pet_info.txt");
   const data = fs.readFileSync(petInfoFilePath, "utf8");
   const lines = data.split("\n");
@@ -186,9 +186,6 @@ function getPetInfo(ownerName = null) {
     return { id, animal, breed, gender, age, type, brag, fullName, email };
   });
 
-  if (ownerName) {
-    return petRecords.filter((pet) => pet.fullName === ownerName);
-  }
   return petRecords;
 }
 
