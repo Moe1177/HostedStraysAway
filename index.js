@@ -1,20 +1,21 @@
-const express = require('express');
-const ejs = require('ejs');
-const fs = require('fs');
-const path = require('path');
-const bodyParser = require('body-parser');
-const session = require('express-session');
+const express = require("express");
+const ejs = require("ejs");
+const fs = require("fs");
+const path = require("path");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const {v4: uuidv4} = require('uuid');
 
 const app = express();
 
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
+app.set("view engine", "ejs");
+app.set("views", __dirname + "/views");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(
   session({
-    secret: 'your_secret_key',
+    secret: "your_secret_key",
     resave: false,
     saveUninitialized: false,
   })
@@ -22,61 +23,61 @@ app.use(
 
 // ----------------------- Get requests -------------------------------------
 
-app.get('/', (req, res) => {
-  res.render('index');
+app.get("/", (req, res) => {
+  res.render("index");
 });
 
-app.get('/find-pets', (req, res) => {
-  res.render('findPet');
+app.get("/find-pets", (req, res) => {
+  res.render("findPet");
 });
 
-app.get('/dog-care', (req, res) => {
-  res.render('dogCare');
+app.get("/dog-care", (req, res) => {
+  res.render("dogCare");
 });
 
-app.get('/cat-care', (req, res) => {
-  res.render('catCare');
+app.get("/cat-care", (req, res) => {
+  res.render("catCare");
 });
 
-app.get('/give-away', (req, res) => {
+app.get("/give-away", (req, res) => {
   const username = req.session.username;
   if (!username) {
-    return res.redirect('/login');
+    return res.redirect("/login");
   }
 
-  res.render('giveAway', { username });
+  res.render("giveAway", { username });
 });
 
-app.get('/contact', (req, res) => {
-  res.render('contact');
+app.get("/contact", (req, res) => {
+  res.render("contact");
 });
 
-app.get('/disclaimer', (req, res) => {
-  res.render('disclaimer');
+app.get("/disclaimer", (req, res) => {
+  res.render("disclaimer");
 });
 
-app.get('/create-account', (req, res) => {
-  res.render('createAccount');
+app.get("/create-account", (req, res) => {
+  res.render("createAccount");
 });
 
-app.get('/login', (req, res) => {
-  res.render('login');
+app.get("/login", (req, res) => {
+  res.render("login");
 });
 
-app.get('/logout', (req, res) => {
-  req.session.destroy(err => {
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
     if (err) {
-      console.log('Error logging out. Please try again.');
+      console.log("Error logging out. Please try again.");
     } else {
-      res.clearCookie('connect.sid');
-      res.redirect('/login');
+      res.clearCookie("connect.sid");
+      res.redirect("/login");
     }
   });
 });
 
 // ----------------------- Post requests --------------------------------
 
-app.post('/createAccount', (req, res) => {
+app.post("/createAccount", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -87,18 +88,18 @@ app.post('/createAccount', (req, res) => {
   if (!usernameRegex.test(username) || !passwordRegex.test(password)) {
     return res
       .status(400)
-      .json({ message: 'Invalid username or password format.' });
+      .json({ message: "Invalid username or password format." });
   }
 
   // Check if the username already exists
-  const loginFilePath = path.join(__dirname, 'data', 'login.txt');
-  const data = fs.readFileSync(loginFilePath, 'utf8');
-  const lines = data.split('\n');
+  const loginFilePath = path.join(__dirname, "data", "login.txt");
+  const data = fs.readFileSync(loginFilePath, "utf8");
+  const lines = data.split("\n");
   for (const line of lines) {
-    const [existingUsername] = line.split(':');
+    const [existingUsername] = line.split(":");
     if (existingUsername === username) {
       return res.status(400).json({
-        message: 'Username already exists. Please choose a different username.',
+        message: "Username already exists. Please choose a different username.",
       });
     }
   }
@@ -109,20 +110,20 @@ app.post('/createAccount', (req, res) => {
 
   return res
     .status(200)
-    .json({ message: 'Account successfully created. You can now login.' });
+    .json({ message: "Account successfully created. You can now login." });
 });
 
-app.post('/login', (req, res) => {
+app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  const filePath = path.join(__dirname, 'data', 'login.txt');
-  const data = fs.readFileSync(filePath, 'utf-8');
-  const lines = data.split('\n');
+  const filePath = path.join(__dirname, "data", "login.txt");
+  const data = fs.readFileSync(filePath, "utf-8");
+  const lines = data.split("\n");
   let loggedIn = false;
 
   for (const line of lines) {
-    const [storedUsername, storedPassword] = line.split(':');
+    const [storedUsername, storedPassword] = line.split(":");
     if (storedUsername === username && storedPassword === password) {
       loggedIn = true;
       break;
@@ -131,15 +132,15 @@ app.post('/login', (req, res) => {
 
   if (loggedIn) {
     req.session.username = username;
-    res.redirect('/give-away');
+    res.redirect("/give-away");
   } else {
     return res
       .status(401)
-      .json({ message: 'Wrong username or password. Please try again.' });
+      .json({ message: "Wrong username or password. Please try again." });
   }
 });
 
-app.post('/give-away', (req, res) => {
+app.post("/give-away", (req, res) => {
   const animal = req.body.animal;
   const breed = req.body.breed;
   const gender = req.body.gender;
@@ -149,48 +150,48 @@ app.post('/give-away', (req, res) => {
   const fullName = req.body.fname;
   const email = req.body.email;
 
-  const petID = generateUniqueID();
+  const petID = uuidv4();
 
-  const petEntry = `${petID}:${animal}:${breed}:${gender}:${age}:${type}:${brag}:${fullName}:${email}`;
+  const petEntry = `${petID}:${animal}:${breed}:${gender}:${age}:${type}:${brag}:${fullName}:${email}\r\n`;
 
-  const filePath = path.join(__dirname, 'data', 'pet_info.txt');
+  const filePath = path.join(__dirname, "data", "pet_info.txt");
   fs.appendFileSync(filePath, petEntry);
 
-  res.redirect('give-away');
+  res.redirect("give-away");
 });
 
-let petCounter = 0;
-function generateUniqueID() {
-  petCounter++;
-  return petCounter;
-}
 
-app.post('/find-pets', (req, res) => {
+app.post("/find-pets", (req, res) => {
   const breed = req.body.breed;
   const gender = req.body.gender;
   const age = req.body.ageCategory;
   const type = req.body.type;
+  const owner = req.body.fname
 
-  const petRecords = getPetInfo().filter(pet => {
+  const petRecords = getPetInfo().filter((pet) => {
     return (
-      (breed === 'Any' || breed === pet.breed) &&
-      (gender === 'Any' || gender === pet.gender) &&
-      (age === 'Any' || age === pet.age) &&
-      (type === 'Any' || type === pet.type)
+      (breed === "Any" || breed === pet.breed) &&
+      (gender === "Any" || gender === pet.gender) &&
+      (age === "Any" || age === pet.age) &&
+      (type === "Any" || type === pet.type) 
     );
   });
-  res.render('petResults', { petRecords });
+  res.render("petResults", { petRecords });
 });
 
-function getPetInfo() {
-  const petInfoFilePath = path.join(__dirname, 'data', 'pet_info.txt');
-  const data = fs.readFileSync(petInfoFilePath, 'utf8');
-  const lines = data.split('\n');
-  const petRecords = lines.map(line => {
+function getPetInfo(ownerName = null) {
+  const petInfoFilePath = path.join(__dirname, "data", "pet_info.txt");
+  const data = fs.readFileSync(petInfoFilePath, "utf8");
+  const lines = data.split("\n");
+  const petRecords = lines.map((line) => {
     const [id, animal, breed, gender, age, type, brag, fullName, email] =
-      line.split(':');
+      line.split(":");
     return { id, animal, breed, gender, age, type, brag, fullName, email };
   });
+
+  if (ownerName) {
+    return petRecords.filter((pet) => pet.fullName === ownerName);
+  }
   return petRecords;
 }
 

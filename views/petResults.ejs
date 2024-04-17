@@ -12,7 +12,8 @@
       <% petRecords.forEach(pet => { %>
       <li>
         <strong>Pet ID:</strong> <%= pet.id %><br />
-        <strong>Owner:</strong> <%= pet.username %><br />
+        <strong>Owner:</strong> <%= pet.fullName %><br />
+        <strong>Email:</strong> <%= pet.email %><br />
         <strong>Type:</strong> <%= pet.type %><br />
         <strong>Breed:</strong> <%= pet.breed %><br />
         <strong>Age:</strong> <%= pet.age %><br />
