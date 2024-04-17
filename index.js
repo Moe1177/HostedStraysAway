@@ -163,7 +163,6 @@ app.post("/find-pets", (req, res) => {
   const gender = req.body.gender;
   const age = req.body.ageCategory;
   const type = req.body.type;
-  const owner = req.body.fname;
 
   const petRecords = getPetInfo().filter((pet) => {
     return (
