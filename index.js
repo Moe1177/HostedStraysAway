@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 
 const app = express();
 
@@ -108,9 +108,7 @@ app.post("/createAccount", (req, res) => {
   const newData = `${username}:${password}\n`;
   fs.appendFileSync(loginFilePath, newData);
 
-  return res
-    .status(200)
-    .json({ message: "Account successfully created. You can now login." });
+  res.render("successAccount");
 });
 
 app.post("/login", (req, res) => {
@@ -157,23 +155,22 @@ app.post("/give-away", (req, res) => {
   const filePath = path.join(__dirname, "data", "pet_info.txt");
   fs.appendFileSync(filePath, petEntry);
 
-  res.redirect("give-away");
+  res.render("successForm");
 });
-
 
 app.post("/find-pets", (req, res) => {
   const breed = req.body.breed;
   const gender = req.body.gender;
   const age = req.body.ageCategory;
   const type = req.body.type;
-  const owner = req.body.fname
+  const owner = req.body.fname;
 
   const petRecords = getPetInfo().filter((pet) => {
     return (
       (breed === "Any" || breed === pet.breed) &&
       (gender === "Any" || gender === pet.gender) &&
       (age === "Any" || age === pet.age) &&
-      (type === "Any" || type === pet.type) 
+      (type === "Any" || type === pet.type)
     );
   });
   res.render("petResults", { petRecords });
