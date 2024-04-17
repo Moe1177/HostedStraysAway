@@ -1,0 +1,29 @@
+<%- include('header') %> <%- include('sidebar') %>
+
+<!-- Your page content goes here -->
+<main>
+  <section class="content">
+    <h1>Pet Search Results</h1>
+
+    <% if (petRecords.length === 0) { %>
+    <p>No pets found matching the criteria.</p>
+    <% } else { %>
+    <ul>
+      <% petRecords.forEach(pet => { %>
+      <li>
+        <strong>Pet ID:</strong> <%= pet.id %><br />
+        <strong>Owner:</strong> <%= pet.username %><br />
+        <strong>Type:</strong> <%= pet.type %><br />
+        <strong>Breed:</strong> <%= pet.breed %><br />
+        <strong>Age:</strong> <%= pet.age %><br />
+        <strong>Gender:</strong> <%= pet.gender %><br />
+      </li>
+      <% }); %>
+    </ul>
+    <% } %>
+
+    <a href="/find-pets">Search Again</a>
+  </section>
+</main>
+
+<%- include('footer') %>

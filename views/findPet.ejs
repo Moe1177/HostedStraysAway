@@ -1,0 +1,96 @@
+<%- include('header') %> <%- include('sidebar') %>
+
+<main>
+  <section class="content">
+    <h2>Find Cat/Dog Survey</h2>
+    <form id="myForm" action="/find-pets" method="POST" name="myForm" onsubmit="return validateForm()">
+      <fieldset>
+        <legend>Cat Survey</legend>
+        <label>Breed:</label>
+        <input type="text" id="breed" name="breed" />
+        <br /><br />
+        <label>Gender:</label>
+        <input type="radio" class="gender" value="female" name="gender" />
+        <label>Female</label>
+        <input type="radio" class="gender" value="male" name="gender" />
+        <label>Male</label>
+        <input
+          type="radio"
+          class="gender"
+          value="Any"
+          name="gender"
+        />
+        <label>Does not matter</label>
+
+        <br />
+        <br />
+
+        <label>Prefered Age:</label>
+        <select name="ageCategory">
+          <option class="age">(0-2yrs)</option>
+          <option class="age">(2yrs-4yrs)</option>
+          <option class="age">(4yrs-8yrs)</option>
+          <option class="age">(8yrs+)</option>
+        </select>
+
+        <br />
+        <br />
+
+        <label>Who does it need to get along with?:</label>
+        <input class="preference" type="radio" value="Cats" name="type" />
+        <label>Cats</label>
+        <input class="preference" type="radio" value="Dogs" name="type" />
+        <label>Dogs</label>
+        <input class="preference" type="radio" value="Children" name="type" />
+        <label>Children</label>
+        <input
+          class="preference"
+          type="radio"
+          value="Any"
+          name="type"
+        />
+        <label>No one</label>
+      </fieldset>
+
+      <p>Thank you for taking the time to fill out our survey!</p>
+      <button class="small-buttons" type="reset" style="cursor: pointer">
+        Reset
+      </button>
+      <button class="small-buttons" type="submit" style="cursor: pointer">
+        Submit
+      </button>
+    </form>
+
+    <hr>
+
+    <h4>Available Pets</h4>
+    <div class="card">
+      <img src="/images/Cat1.jpg" alt="Image 1" />
+      <div class="card-content">
+        <p>
+          <b>Sushi</b> is a Scottish Fold. Sushi is a 2
+          year old male. He only gets along well with children.
+          <br /><br />
+          Full name: <b>Janet Blanchette</b> <br />
+          Email: <b>ilovesushi@gmail.com</b>
+        </p>
+        <button type="submit">Submit</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="/images/Cat2.jpg" alt="Image 2" />
+      <div class="card-content">
+        <p>
+          <b>Yami</b> is an American shorthair turning 5 years old. She gets along perfectly with other cats, dogs
+          and children.  <br /><br />
+          Full name: <b>Victor White</b> <br />
+          Email: <b>v.white24@gmail.com</b>
+        </p>
+        <button type="submit">Submit</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('footer') %>

@@ -1,0 +1,24 @@
+<%- include('header') %> <%- include('sidebar') %>
+
+<!-- Your page content goes here -->
+<main>
+  <section class="content">
+    <form id="createAccountForm" action="/createAccount" method="POST">
+      <h2>Create an Account</h2>
+      <label for="username">Username:</label>
+      <br />
+      <input type="text" name="username" id="username" required />
+
+      <br /><br />
+
+      <label for="password">Password:</label>
+      <br />
+      <input type="text" name="password" id="password" required />
+      <br />
+      <button class="small-buttons" style="margin-top: 15px">Create</button>
+    </form>
+    <div id="message"></div>
+  </section>
+</main>
+
+<%- include('footer') %>

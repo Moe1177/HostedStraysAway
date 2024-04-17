@@ -1,0 +1,78 @@
+<%- include('header') %> <%- include('sidebar') %>
+
+<!-- Your page content goes here -->
+<main>
+  <section class="content">
+    <h2>Welcome, <%= username %>!</h2>
+    <form action="/give-away" method="POST" name="myForm" onsubmit="return validateGiveAwayForm()">
+      <fieldset>
+        <legend>Give Away Pet</legend>
+        <label>Pet:</label>
+        <input type="radio" value="cat" id="animal" name="animal" />
+        <label>Cat</label>
+        <input type="radio" value="dog" name="animal" />
+        <label>Dog</label>
+        <br /><br />
+        <label>Breed:</label>
+        <input type="text" id="Breed" name="breed" />
+        <input type="radio" name="breed" />
+        <label>Mixed</label>
+        <br /><br />
+        <label>Gender:</label>
+        <input type="radio" value="female" name="gender" />
+        <label>Female</label>
+        <input type="radio" value="male" name="gender" />
+        <label>Male</label>
+
+        <br />
+        <br />
+
+        <label>Age:</label>
+        <select name="ageCategory">
+          <option>(0-2yrs)</option>
+          <option>(2yrs-4yrs)</option>
+          <option>(4yrs-8yrs)</option>
+          <option>(8yrs+)</option>
+        </select>
+
+        <br />
+        <br />
+
+        <label>Who does it need to get along with?:</label>
+        <input type="radio" value="Cats" name="type" />
+        <label>Cats</label>
+        <input type="radio" value="Dogs" name="type" />
+        <label>Dogs</label>
+        <input type="radio" value="Children" name="type" />
+        <label>Children</label>
+        <input type="radio" value="Does not matter" name="type" />
+        <label>No one</label>
+
+        <br /><br />
+
+        <textarea
+          name="brag"
+          id="message"
+          cols="60"
+          rows="6"
+          placeholder="Brag about your pet"
+          style="resize: none"
+        ></textarea>
+
+        <br /><br />
+
+        <label>Your Full Name:</label>
+        <input type="text" name="fname" />
+        <br /><br />
+        <label>Your Email:</label>
+        <input type="text" name="email" />
+      </fieldset>
+
+      <p>Thank you for taking the time to fill out our survey!</p>
+      <button class="small-buttons" type="submit" style="cursor: pointer">Submit</button>
+      <button class="small-buttons" type="reset" style="cursor: pointer">Reset</button>
+    </form>
+  </section>
+</main>
+
+<%- include('footer') %>

@@ -1,0 +1,27 @@
+<%- include('header') %> <%- include('sidebar') %>
+
+<!-- Your page content goes here -->
+<main>
+  <section class="content">
+    <h1>Login</h1>
+    <% if (typeof loggedOut !== 'undefined' && loggedOut === true) { %>
+    <p style="color: green">You have been successfully logged out.</p>
+    <% delete loggedOut; %> <% } %>
+    <form action="/login" method="POST">
+      <div>
+        <label for="username">Username:</label>
+        <br />
+        <input type="text" id="username" name="username" required />
+      </div>
+      <br />
+      <div>
+        <label for="password">Password:</label>
+        <br />
+        <input type="password" id="password" name="password" required />
+      </div>
+      <button class="small-buttons" type="submit">Login</button>
+    </form>
+  </section>
+</main>
+
+<%- include('footer') %>

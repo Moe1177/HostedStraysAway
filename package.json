@@ -1,0 +1,20 @@
+{
+  "name": "a3_40278616_soen287",
+  "version": "1.0.0",
+  "description": "This is a simple website that allows users to put up their pet for adoption or adopt one.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}

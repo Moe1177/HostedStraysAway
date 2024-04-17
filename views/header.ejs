@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Strays Away</title>
+    <link rel="stylesheet" href="/Styles/Question7.css">
+    <script src="/JavaScript/Question7.js"></script>
+  </head>
+  <body onload="startTime()">
+    <header>
+      <div class="logo">
+        <a href="/">
+          <img src="/images/logo.jpg" alt="Logo" />
+        </a>
+        <h4 id="time"></h4>
+      </div>
+      <h1>Strays Away</h1>
+    </header>
+    <script>
+      function startTime() {
+        const today = new Date();
+        let h = today.getHours();
+        let m = today.getMinutes();
+        let s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('time').innerHTML =
+          getCurrentDate() + ' - ' + h + ':' + m + ':' + s;
+
+        setTimeout(startTime, 1000);
+      }
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = '0' + i;
+        }
+        return i;
+      }
+    </script>
+  </body>
+</html>
