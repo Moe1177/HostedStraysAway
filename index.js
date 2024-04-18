@@ -134,13 +134,19 @@ app.post("/login", (req, res) => {
 
 app.post("/give-away", (req, res) => {
   const animal = req.body.animal;
-  const breed = req.body.breed;
+  let breed = req.body.breed;
   const gender = req.body.gender;
   const age = req.body.ageCategory;
   const type = req.body.type;
   const brag = req.body.brag;
   const fullName = req.body.fname;
   const email = req.body.email;
+
+  console.log(breed);
+
+  if (breed[0] == '') {
+    breed = 'Mixed';
+  }
 
   const petID = uuidv4();
 

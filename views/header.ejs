@@ -80,7 +80,7 @@
 
         let breed = document.forms["myForm"]["breed"].value;
         let mixedBreed = document.getElementsByName("breed");
-        if ((breed == "" || breed == null) && !mixedBreed[0].checked) {
+        if (breed == null && !mixedBreed[0].checked) {
           alert("Please enter your pet's breed.");
           return false;
         }
