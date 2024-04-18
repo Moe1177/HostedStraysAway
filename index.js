@@ -86,9 +86,7 @@ app.post("/createAccount", (req, res) => {
   const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{4,}$/;
 
   if (!usernameRegex.test(username) || !passwordRegex.test(password)) {
-    return res
-      .status(400)
-      .json({ message: "Invalid username or password format." });
+    return res.render('failedAccount');
   }
 
   // Check if the username already exists
@@ -98,9 +96,7 @@ app.post("/createAccount", (req, res) => {
   for (const line of lines) {
     const [existingUsername] = line.split(":");
     if (existingUsername === username) {
-      return res.status(400).json({
-        message: "Username already exists. Please choose a different username.",
-      });
+      return res.render('failedAccount');
     }
   }
 
@@ -132,9 +128,7 @@ app.post("/login", (req, res) => {
     req.session.username = username;
     res.redirect("/give-away");
   } else {
-    return res
-      .status(401)
-      .json({ message: "Wrong username or password. Please try again." });
+    return res.render('failedLogin');
   }
 });
 

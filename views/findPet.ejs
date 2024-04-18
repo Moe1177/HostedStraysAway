@@ -3,9 +3,15 @@
 <main>
   <section class="content">
     <h2>Find Cat/Dog Survey</h2>
-    <form id="myForm" action="/find-pets" method="POST" name="myForm" onsubmit="return validateForm()">
+    <form
+      id="myForm"
+      action="/find-pets"
+      method="POST"
+      name="myForm"
+      onsubmit="return validateForm()"
+    >
       <fieldset>
-        <legend>Cat Survey</legend>
+        <legend>Find Cat/Dog</legend>
         <label>Breed:</label>
         <input type="text" id="breed" name="breed" />
         <br /><br />
@@ -14,12 +20,7 @@
         <label>Female</label>
         <input type="radio" class="gender" value="male" name="gender" />
         <label>Male</label>
-        <input
-          type="radio"
-          class="gender"
-          value="Any"
-          name="gender"
-        />
+        <input type="radio" class="gender" value="Any" name="gender" />
         <label>Does not matter</label>
 
         <br />
@@ -43,12 +44,7 @@
         <label>Dogs</label>
         <input class="preference" type="radio" value="Children" name="type" />
         <label>Children</label>
-        <input
-          class="preference"
-          type="radio"
-          value="Any"
-          name="type"
-        />
+        <input class="preference" type="radio" value="Any" name="type" />
         <label>Does not matter</label>
       </fieldset>
 
@@ -61,16 +57,15 @@
       </button>
     </form>
 
-    <hr>
+    <hr />
 
     <h4>Available Pets</h4>
     <div class="card">
       <img src="/images/Cat1.jpg" alt="Image 1" />
       <div class="card-content">
         <p>
-          <b>Sushi</b> is a Scottish Fold. Sushi is a 2
-          year old male. He only gets along well with children.
-          <br /><br />
+          <b>Sushi</b> is a Scottish Fold. Sushi is a 2 year old male. He only
+          gets along well with children. <br /><br />
           Full name: <b>Janet Blanchette</b> <br />
           Email: <b>ilovesushi@gmail.com</b>
         </p>
@@ -82,8 +77,8 @@
       <img src="/images/Cat2.jpg" alt="Image 2" />
       <div class="card-content">
         <p>
-          <b>Yami</b> is an American shorthair turning 5 years old. She gets along perfectly with other cats, dogs
-          and children.  <br /><br />
+          <b>Yami</b> is an American shorthair turning 5 years old. She gets
+          along perfectly with other cats, dogs and children. <br /><br />
           Full name: <b>Victor White</b> <br />
           Email: <b>v.white24@gmail.com</b>
         </p>

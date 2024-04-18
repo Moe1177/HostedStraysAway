@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Strays Away</title>
-    <link rel="stylesheet" href="/Styles/Question7.css">
+    <link rel="stylesheet" href="/Styles/Question7.css" />
     <script src="/JavaScript/Question7.js"></script>
   </head>
   <body onload="startTime()">
@@ -25,17 +25,111 @@
         let s = today.getSeconds();
         m = checkTime(m);
         s = checkTime(s);
-        document.getElementById('time').innerHTML =
-          getCurrentDate() + ' - ' + h + ':' + m + ':' + s;
+        document.getElementById("time").innerHTML =
+          getCurrentDate() + " - " + h + ":" + m + ":" + s;
 
         setTimeout(startTime, 1000);
       }
 
       function checkTime(i) {
         if (i < 10) {
-          i = '0' + i;
+          i = "0" + i;
         }
         return i;
+      }
+
+      function validateForm() {
+        let x = document.forms["myForm"]["breed"].value;
+        if (x == "" || x == null) {
+          alert("Fill out breed.");
+          return false;
+        }
+
+        let gender = document.getElementsByName("gender");
+
+        if (!gender[0].checked && !gender[1].checked && !gender[2].checked) {
+          alert("Please select a prefered gender");
+          return false;
+        }
+
+        let type = document.getElementsByName("type");
+
+        if (
+          !type[0].checked &&
+          !type[1].checked &&
+          !type[2].checked &&
+          !type[3].checked
+        ) {
+          alert("Please select who you want the pet to get along with");
+          return false;
+        }
+      }
+
+      function validateEmail(email) {
+        let re = /\S+@\S+\.\S+/;
+        return re.test(email);
+      }
+
+      function validateGiveAwayForm() {
+        let animal = document.getElementsByName("animal");
+
+        if (!animal[0].checked && !animal[1].checked) {
+          alert("Please select what type of animal");
+          return false;
+        }
+
+        let breed = document.forms["myForm"]["breed"].value;
+        let mixedBreed = document.getElementsByName("breed");
+        if ((breed == "" || breed == null) && !mixedBreed[0].checked) {
+          alert("Please enter your pet's breed.");
+          return false;
+        }
+
+        let gender = document.getElementsByName("gender");
+
+        if (!gender[0].checked && !gender[1].checked) {
+          alert("Please select your pet's gender.");
+          return false;
+        }
+
+        let type = document.getElementsByName("type");
+
+        if (
+          !type[0].checked &&
+          !type[1].checked &&
+          !type[2].checked &&
+          !type[3].checked
+        ) {
+          alert("Please select who your pet gets along with");
+          return false;
+        }
+
+        let brag = document.forms["myForm"]["brag"].value;
+        if (brag == "" || brag == null) {
+          alert("Brag about your pet");
+          return false;
+        }
+
+        let fullName = document.forms["myForm"]["fname"].value;
+
+        if (fullName == "" || fullName == null) {
+          alert("Enter your full name.");
+          return false;
+        }
+
+        let email = document.forms["myForm"]["email"].value;
+
+        let valid = validateEmail(email);
+
+        if (email == "" || email == null) {
+          alert("Please enter an email.");
+          return false;
+        }
+
+        if (!valid) {
+          alert("Enter a valid email");
+          return false;
+        }
       }
     </script>
   </body>
