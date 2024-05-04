@@ -111,7 +111,7 @@ app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  const filePath = path.join(__dirname, "data", "login.txt");
+  const filePath = path.join(__dirname, "/data/", "login.txt");
   const data = fs.readFileSync(filePath, "utf-8");
   const lines = data.split("\n");
   let loggedIn = false;
@@ -152,7 +152,7 @@ app.post("/give-away", (req, res) => {
 
   const petEntry = `${petID}:${animal}:${breed}:${gender}:${age}:${type}:${brag}:${fullName}:${email}\r\n`;
 
-  const filePath = path.join(__dirname, "data", "pet_info.txt");
+  const filePath = path.join(__dirname, "/data/", "pet_info.txt");
   fs.appendFileSync(filePath, petEntry);
 
   res.render("successForm");
@@ -176,7 +176,7 @@ app.post("/find-pets", (req, res) => {
 });
 
 function getPetInfo() {
-  const petInfoFilePath = path.join(__dirname, "data", "pet_info.txt");
+  const petInfoFilePath = path.join(__dirname, "/data/", "pet_info.txt");
   const data = fs.readFileSync(petInfoFilePath, "utf8");
   const lines = data.split("\n");
   const petRecords = lines.map((line) => {
