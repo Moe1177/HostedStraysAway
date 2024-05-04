@@ -5,11 +5,12 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const { v4: uuidv4 } = require("uuid");
+const process = require('process');
 
 const app = express();
 
 app.set("view engine", "ejs");
-app.set("views", __dirname + "/views/");
+app.set("views", __dirname + "/views");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public/"));
@@ -90,7 +91,7 @@ app.post("/createAccount", (req, res) => {
   }
 
   // Check if the username already exists
-  const loginFilePath = path.join(__dirname, "data", "login.txt");
+  const loginFilePath = path.join(process.cwd(), "data", "login.txt");
   const data = fs.readFileSync(loginFilePath, "utf8");
   const lines = data.split("\n");
   for (const line of lines) {
@@ -111,7 +112,7 @@ app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  const filePath = path.join(__dirname, "/data/", "login.txt");
+  const filePath = path.join(process.cwd(), "/data/", "login.txt");
   const data = fs.readFileSync(filePath, "utf-8");
   const lines = data.split("\n");
   let loggedIn = false;
@@ -142,7 +143,6 @@ app.post("/give-away", (req, res) => {
   const fullName = req.body.fname;
   const email = req.body.email;
 
-  console.log(breed);
 
   if (breed[0] == '') {
     breed = 'Mixed';
@@ -152,7 +152,7 @@ app.post("/give-away", (req, res) => {
 
   const petEntry = `${petID}:${animal}:${breed}:${gender}:${age}:${type}:${brag}:${fullName}:${email}\r\n`;
 
-  const filePath = path.join(__dirname, "/data/", "pet_info.txt");
+  const filePath = path.join(process.cwd(), "/data/", "pet_info.txt");
   fs.appendFileSync(filePath, petEntry);
 
   res.render("successForm");
@@ -176,7 +176,7 @@ app.post("/find-pets", (req, res) => {
 });
 
 function getPetInfo() {
-  const petInfoFilePath = path.join(__dirname, "/data/", "pet_info.txt");
+  const petInfoFilePath = path.join(process.cwd(), "/data/", "pet_info.txt");
   const data = fs.readFileSync(petInfoFilePath, "utf8");
   const lines = data.split("\n");
   const petRecords = lines.map((line) => {
