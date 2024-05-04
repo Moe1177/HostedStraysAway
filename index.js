@@ -9,7 +9,7 @@ const { v4: uuidv4 } = require("uuid");
 const app = express();
 
 app.set("view engine", "ejs");
-app.set("views", __dirname + "/views");
+app.set("views", __dirname + "/views/");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public/"));
