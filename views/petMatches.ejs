@@ -5,11 +5,11 @@
   <section class="content">
     <h1>Pet Search Results</h1>
 
-    <% if (petRecords.length === 0) { %>
+    <% if (petMatches.length === 0) { %>
     <p>No pets found matching the criteria.</p>
     <% } else { %>
     <ul>
-      <% petRecords.forEach(pet => { %>
+      <% petMatches.forEach(pet => { %>
       <li>
         <strong>Pet ID:</strong> <%= pet.id %><br />
         <strong>Owner:</strong> <%= pet.fullName %><br />
@@ -22,9 +22,10 @@
       <br>
       <% }); %>
     </ul>
+
     <% } %>
 
-    <a href="/find-pets">
+    <a href="/find-match">
       <button class="small-buttons" style="width: fit-content;">Search Again</button></a>
   </section>
 </main>

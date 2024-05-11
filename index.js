@@ -5,7 +5,9 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const { v4: uuidv4 } = require("uuid");
-const process = require('process');
+const process = require("process");
+const { Observable, of, defer, from } = require("rxjs");
+const { filter, toArray } = require("rxjs/operators");
 
 const app = express();
 
@@ -30,6 +32,10 @@ app.get("/", (req, res) => {
 
 app.get("/find-pets", (req, res) => {
   res.render("findPet");
+});
+
+app.get("/find-match", (req, res) => {
+  res.render("findMatch");
 });
 
 app.get("/dog-care", (req, res) => {
@@ -87,7 +93,7 @@ app.post("/createAccount", (req, res) => {
   const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{4,}$/;
 
   if (!usernameRegex.test(username) || !passwordRegex.test(password)) {
-    return res.render('failedAccount');
+    return res.render("failedAccount");
   }
 
   // Check if the username already exists
@@ -97,7 +103,7 @@ app.post("/createAccount", (req, res) => {
   for (const line of lines) {
     const [existingUsername] = line.split(":");
     if (existingUsername === username) {
-      return res.render('failedAccount');
+      return res.render("failedAccount");
     }
   }
 
@@ -129,7 +135,7 @@ app.post("/login", (req, res) => {
     req.session.username = username;
     res.redirect("/give-away");
   } else {
-    return res.render('failedLogin');
+    return res.render("failedLogin");
   }
 });
 
@@ -143,9 +149,8 @@ app.post("/give-away", (req, res) => {
   const fullName = req.body.fname;
   const email = req.body.email;
 
-
-  if (breed[0] == '') {
-    breed = 'Mixed';
+  if (breed[0] == "") {
+    breed = "Mixed";
   }
 
   const petID = uuidv4();
@@ -175,6 +180,23 @@ app.post("/find-pets", (req, res) => {
   res.render("petResults", { petRecords });
 });
 
+app.post("/find-match", (req, res) => {
+  const type = req.body.type;
+  let petMatches;
+
+  getPetInfoObservable()
+    .pipe(
+      filter((pet) => {
+        return type === pet.type;
+      }),
+      toArray()
+    )
+    .subscribe((matches) => {
+      petMatches = matches;
+      res.render("petMatches", { petMatches });
+    });
+});
+
 function getPetInfo() {
   const petInfoFilePath = path.join(process.cwd(), "/data/", "pet_info.txt");
   const data = fs.readFileSync(petInfoFilePath, "utf8");
@@ -186,6 +208,10 @@ function getPetInfo() {
   });
 
   return petRecords;
+}
+
+function getPetInfoObservable() {
+  return defer(() => getPetInfo());
 }
 
 // -------------------------- Server location -------------------------------

@@ -1,0 +1,25 @@
+<%- include('header') %> <%- include('sidebar') %>
+
+<main>
+  <section>
+    <form action="/find-match" method="POST">
+      <fieldset>
+        <legend>Find a Match</legend>
+        <label>Match with all the pets who get along with</label>
+        <br><br>
+        <input type="radio" name="type" value="Cats"/>
+        <label>Cats</label>
+
+        <input type="radio" name="type" value="Dogs"/>
+        <label>Dogs</label>
+
+        <input type="radio" name="type" value="Children"/>
+        <label>Children</label>
+        <br><br>
+        <button type="submit">Submit</button>
+      </fieldset>
+    </form>
+  </section>
+</main>
+
+<% - include('footer') %>
