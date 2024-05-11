@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const { v4: uuidv4 } = require("uuid");
 const process = require("process");
-const { Observable, of, defer, from } = require("rxjs");
+const {  defer} = require("rxjs");
 const { filter, toArray } = require("rxjs/operators");
 
 const app = express();
