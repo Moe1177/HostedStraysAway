@@ -1,0 +1,4 @@
+162beb87-8585-4550-826c-2ab496644c82:cat:Mixed:female:(0-2yrs):Cats:hi:Mohamad Addasi:maddasi04@gmail.com
+1dd41f84-f0d9-4cea-aaf1-7dc7bad2f7c1:cat:Mixed:female:(4yrs-8yrs):Children:hi again:Aisha Mousa:mohamad.addasi@concordia.ca
+3271ad89-07cf-4aca-8d35-75804016a91b:dog:Mixed:female:(8yrs+):Children:Hello once more:Hasan Addasi:aishamousa@gmail.com
+55feec56-66fa-45cf-8140-5b4f5a3eb7f0:cat:Mixed:female:(0-2yrs):Cats:Hello:Sarah Ghazal:sarah1ghazal@gmail.com
